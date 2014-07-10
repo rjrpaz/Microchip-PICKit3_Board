@@ -1,0 +1,5 @@
+_Delay1KTCYx: CODE, 1612 0 14
+_main: CODE, 1546 0 66
+__initialization: CODE, 1626 0 2
+_LED_LookupTable: SMALLCONST, 1536 0 8
+Total: 90
