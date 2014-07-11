@@ -1,0 +1,8 @@
+_Timer0_Init: CODE, 436 0 22
+_main: CODE, 390 0 46
+__initialization: CODE, 488 0 2
+_InterruptServiceLow: CODE, 24 0 216
+_ADC_Convert: CODE, 478 0 10
+_InterruptServiceHigh: CODE, 8 0 382
+_ADC_Init: CODE, 458 0 20
+Total: 698
