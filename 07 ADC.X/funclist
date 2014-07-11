@@ -1,0 +1,6 @@
+_Timer0_Init: CODE, 32576 0 18
+_main: CODE, 32618 0 150
+__initialization: CODE, 32560 0 0
+_ADC_Convert: CODE, 32566 0 10
+_ADC_Init: CODE, 32594 0 24
+Total: 202
