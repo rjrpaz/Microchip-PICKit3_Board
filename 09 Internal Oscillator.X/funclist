@@ -1,0 +1,9 @@
+_Delay1KTCYx: CODE, 944 0 14
+_main: CODE, 862 0 50
+_InterruptService: CODE, 8 0 182
+__initialization: CODE, 912 0 22
+_EnableInterrupts: CODE, 958 0 8
+_SetIntOSC: CODE, 194 0 334
+i2_SetIntOSC: CODE, 528 0 334
+_SetupINT0Switch: CODE, 966 0 8
+Total: 952
