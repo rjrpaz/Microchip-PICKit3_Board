@@ -44,6 +44,7 @@
 
 /** I N C L U D E S **************************************************/
 #include <xc.h>
+#include <plib.h>
 #include "11 Program Memory.h"  // header file
 
 /** V A R I A B L E S *************************************************/
@@ -53,18 +54,19 @@
 /** D E C L A R A T I O N S *******************************************/
 // #pragma romdata mystrings = 0x100
 // rom char hello_str[] = "Hello!";
-char hello_str[] = "Hello!";
+const char hello_str[] @ 0x100 = "Hello!";
 // rom char mchp_str[] = "Microchip";
-char mchp_str[] = "Microchip";
+const char mchp_str[] @ 0x108 = "Microchip";
 // rom char fill_60[] = "012345678901234567890123456789012345678901234567890123456789";
-char fill_60[] = "012345678901234567890123456789012345678901234567890123456789";
+const char fill_60[] @ 0x114 = "012345678901234567890123456789012345678901234567890123456789";
+const char cadena[5] @ 0x200 = {'H', 'O', 'L', 'A', 0};
 
 // #pragma code mainstart = 0x280   // declare executable instructions after the romdata
 
 void main (void)
 {
 //    near rom char *rom_pointer;     // 16-bit pointer to program memory
-    char *rom_pointer;     // 16-bit pointer to program memory
+    const char *rom_pointer;     // 16-bit pointer to program memory
     char singlechar = '?';
     char i = 0;
     unsigned char Alphabet[32];
@@ -78,7 +80,7 @@ void main (void)
     } while (singlechar != 0);      // string is terminated with 0x00 value.
 
     // read at specific address
-    singlechar = ProgMemRdAddress(0x107);  // returns 'M' from "Microchip".
+    singlechar = ProgMemRdAddress(0x108);  // returns 'M' from "Microchip".
 
     // Erase the 64 bytes starting at 0x100
     ProgMemErase64(0x100);
@@ -89,7 +91,8 @@ void main (void)
         Alphabet[i] = 'A' + i;
     }
     // write the buffer into program memory
-    ProgMemWr32(0x100, Alphabet);
+//    ProgMemWr32(0x100, Alphabet);
+    WriteBlockFlash(0x100, 1, Alphabet);
 
     while(1)
     {
@@ -102,10 +105,10 @@ unsigned char ProgMemRdAddress(unsigned int address)
   // given in "address".
 
 //    near rom unsigned char *ptr;
-    unsigned char *ptr;
+    const unsigned char *ptr;
 
 //    ptr = (rom unsigned char *)address;
-    ptr = (unsigned char *)address;
+    ptr = (unsigned const char *)address;
 
     return *ptr;
 }
@@ -140,13 +143,14 @@ void ProgMemErase64(unsigned int address)
 
 // unsigned char ProgMemWr32(unsigned int address, unsigned char *buffer_ptr)
 void ProgMemWr32(unsigned int address, unsigned char *buffer_ptr)
-{ // program memory must be written 32 bytes at a time in the PIC18F4520, starting at a 
-  // 32-byte address boundary.  It must also be erased first.
-//    near rom unsigned char *ptr;
-    unsigned char *ptr;
+{
+    // program memory must be written 32 bytes at a time in the PIC18F4520, starting at a
+    // 32-byte address boundary.  It must also be erased first.
+    // near rom unsigned char *ptr;
+    static unsigned char *ptr;
     char i;
 
-//    ptr = (rom unsigned char *)(address & 0xFFE0);// ensure write starts on 32-byte boundary
+    // ptr = (rom unsigned char *)(address & 0xFFE0);// ensure write starts on 32-byte boundary
     ptr = (unsigned char *)(address & 0xFFE0);// ensure write starts on 32-byte boundary
 
     for (i = 0; i < 32; i++)
@@ -166,11 +170,11 @@ void ProgMemWr32(unsigned int address, unsigned char *buffer_ptr)
 
     // execute code sequence, which cannot be interrupted, then execute write32
 
-    //INTCONbits.GIE = 0;   // Disable interrupts
+    INTCONbits.GIE = 0;   // Disable interrupts
     EECON2 = 0x55;          // Begin Write sequence
     EECON2 = 0xAA;
     EECON1bits.WR = 1;      // Set WR bit to begin 32-byte write
-    //INTCONbits.GIE = 1;   // re-enable interrupts
+    INTCONbits.GIE = 1;   // re-enable interrupts
 
     EECON1bits.WREN = 0;                // disable write/erase operations
 }

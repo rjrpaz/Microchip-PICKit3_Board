@@ -1,6 +1,10 @@
-_ProgMemWr32: CODE, 32542 0 88
-_ProgMemErase64: CODE, 32376 0 34
-_ProgMemRdAddress: CODE, 32356 0 20
-_main: CODE, 32630 0 138
-__initialization: CODE, 32472 0 64
-Total: 344
+_ProgMemErase64: CODE, 1990 0 34
+_mchp_str: CODE, 264 0 10
+_hello_str: CODE, 256 0 7
+_ProgMemRdAddress: CODE, 1950 0 40
+_fill_60: CODE, 276 0 61
+_main: CODE, 1772 0 178
+_cadena: CODE, 512 0 5
+__initialization: CODE, 2024 0 4
+_WriteBlockFlash: CODE, 1538 0 234
+Total: 573
