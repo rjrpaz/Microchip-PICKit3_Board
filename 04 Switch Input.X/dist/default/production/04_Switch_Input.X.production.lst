@@ -1,0 +1,392 @@
+
+
+Microchip Technology PIC18 LITE Macro Assembler V1.21 build 54009 
+                                                                                               Sun Sep  7 06:30:04 2014
+
+Microchip Technology Omniscient Code Generator (Lite mode) build 54009
+     1                           	processor	18F45K20
+     2                           	fnconf	rparam,??,?,0
+     3                           	opt	pw 120
+     4                           	opt	lm
+     5                           	psect	nvCOMRAM,global,class=COMRAM,space=1,delta=1
+     6                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     7                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1
+     8                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     9                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    10                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1
+    11                           	psect	rparam,global,class=COMRAM,space=1,delta=1
+    12  0000                     _ANSELH	set	3967
+    13  0000                     _INTCON2bits	set	4081
+    14  0000                     _LATD	set	3980
+    15  0000                     _PORTBbits	set	3969
+    16  0000                     _TRISBbits	set	3987
+    17  0000                     _TRISD	set	3989
+    18  0000                     _WPUBbits	set	3964
+    19                           
+    20                           	psect	nvCOMRAM
+    21  000004                     __pnvCOMRAM:
+    22                           	opt stack 0
+    23  000004                     _LED_Display:
+    24                           	opt stack 0
+    25  000004                     	ds	1
+    26                           
+    27                           ; #config settings
+    28  0000                     
+    29                           	psect	cinit
+    30  007F8A                     __pcinit:
+    31                           	opt stack 0
+    32  007F8A                     start_initialization:
+    33                           	opt stack 0
+    34  007F8A                     __initialization:
+    35                           	opt stack 0
+    36  007F8A                     end_of_initialization:
+    37                           	opt stack 0
+    38  007F8A                     __end_of__initialization:
+    39                           	opt stack 0
+    40  007F8A  0100               	movlb	0
+    41  007F8C  EFCF  F03F         	goto	_main	;jump to C main() function
+    42                           
+    43                           	psect	cstackCOMRAM
+    44  000001                     __pcstackCOMRAM:
+    45                           	opt stack 0
+    46  000001                     ?_Delay10TCYx:
+    47                           	opt stack 0
+    48  000001                     Delay10TCYx@unit:
+    49                           	opt stack 0
+    50                           
+    51                           ; 1 bytes @ 0x0
+    52  000001                     	ds	1
+    53  000002                     ??_main:
+    54                           
+    55                           ; 0 bytes @ 0x1
+    56  000002                     	ds	1
+    57  000003                     main@Switch_Count:
+    58                           	opt stack 0
+    59                           
+    60                           ; 1 bytes @ 0x2
+    61  000003                     	ds	1
+    62                           
+    63 ;;
+    64 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+    65 ;;
+    66 ;; *************** function _main *****************
+    67 ;; Defined at:
+    68 ;;		line 60 in file "main.c"
+    69 ;; Parameters:    Size  Location     Type
+    70 ;;		None
+    71 ;; Auto vars:     Size  Location     Type
+    72 ;;  Switch_Count    1    2[COMRAM] unsigned char 
+    73 ;; Return value:  Size  Location     Type
+    74 ;;		None               void
+    75 ;; Registers used:
+    76 ;;		wreg, status,2, status,0, cstack
+    77 ;; Tracked objects:
+    78 ;;		On entry : 0/0
+    79 ;;		On exit  : 0/0
+    80 ;;		Unchanged: 0/0
+    81 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+    82 ;;      Params:         0       0       0       0       0       0       0
+    83 ;;      Locals:         1       0       0       0       0       0       0
+    84 ;;      Temps:          1       0       0       0       0       0       0
+    85 ;;      Totals:         2       0       0       0       0       0       0
+    86 ;;Total ram usage:        2 bytes
+    87 ;; Hardware stack levels required when called:    1
+    88 ;; This function calls:
+    89 ;;		_Delay10TCYx
+    90 ;; This function is called by:
+    91 ;;		Startup code after reset
+    92 ;; This function uses a non-reentrant model
+    93 ;;
+    94                           
+    95                           	psect	text0
+    96  007F9E                     __ptext0:
+    97                           	opt stack 0
+    98  007F9E                     _main:
+    99                           	opt stack 30
+   100                           
+   101                           ;main.c: 61: unsigned char Switch_Count = 0;
+   102                           
+   103                           ;incstack = 0
+   104                           ;incstack = 0
+   105  007F9E  6E02               	movwf	??_main& (0+255),c
+   106  007FA0  0E00               	movlw	0
+   107  007FA2  6E03               	movwf	main@Switch_Count,c
+   108  007FA4  5002               	movf	??_main& (0+255),w,c
+   109                           
+   110                           ;main.c: 63: LED_Display = 1;
+   111  007FA6  6E02               	movwf	??_main& (0+255),c
+   112  007FA8  0E01               	movlw	1
+   113  007FAA  6E04               	movwf	_LED_Display,c
+   114  007FAC  5002               	movf	??_main& (0+255),w,c
+   115                           
+   116                           ;main.c: 65: TRISD = 0b00000000;
+   117  007FAE  0E00               	movlw	0
+   118  007FB0  6E95               	movwf	3989,c	;volatile
+   119                           
+   120                           ;main.c: 66: INTCON2bits.RBPU = 0;
+   121  007FB2  9EF1               	bcf	intcon2,7,c	;volatile
+   122                           
+   123                           ;main.c: 67: WPUBbits.WPUB0 = 1;
+   124  007FB4  807C               	bsf	3964,0,c	;volatile
+   125                           
+   126                           ;main.c: 68: ANSELH = 0x00;
+   127  007FB6  0E00               	movlw	0
+   128  007FB8  6E7F               	movwf	3967,c	;volatile
+   129                           
+   130                           ;main.c: 69: TRISBbits.TRISB0 = 1;
+   131  007FBA  8093               	bsf	3987,0,c	;volatile
+   132  007FBC                     l631:
+   133                           
+   134                           ;main.c: 72: {
+   135                           ;main.c: 73: LATD = LED_Display;
+   136  007FBC  C004  FF8C         	movff	_LED_Display,3980	;volatile
+   137                           
+   138                           ;main.c: 75: LED_Display <<= 1;
+   139  007FC0  90D8               	bcf	status,0,c
+   140  007FC2  3604               	rlcf	_LED_Display,f,c
+   141                           
+   142                           ;main.c: 77: if (LED_Display == 0)
+   143  007FC4  6604               	tstfsz	_LED_Display,c
+   144  007FC6  D004               	goto	l23
+   145                           
+   146                           ;main.c: 78: LED_Display = 1;
+   147  007FC8  6E02               	movwf	??_main& (0+255),c
+   148  007FCA  0E01               	movlw	1
+   149  007FCC  6E04               	movwf	_LED_Display,c
+   150  007FCE  5002               	movf	??_main& (0+255),w,c
+   151  007FD0                     l23:
+   152  007FD0  A081               	btfss	3969,0,c	;volatile
+   153  007FD2  D7FE               	goto	l23
+   154                           
+   155                           ;main.c: 83: Switch_Count = 5;
+   156  007FD4  6E02               	movwf	??_main& (0+255),c
+   157  007FD6  0E05               	movlw	5
+   158  007FD8  6E03               	movwf	main@Switch_Count,c
+   159  007FDA  5002               	movf	??_main& (0+255),w,c
+   160  007FDC                     l641:
+   161                           
+   162                           ;main.c: 85: {
+   163                           ;main.c: 86: if (PORTBbits.RB0 == 0)
+   164  007FDC  B081               	btfsc	3969,0,c	;volatile
+   165  007FDE  D002               	goto	l645
+   166                           
+   167                           ;main.c: 87: {
+   168                           ;main.c: 88: Switch_Count++;
+   169  007FE0  2A03               	incf	main@Switch_Count,f,c
+   170                           
+   171                           ;main.c: 89: }
+   172  007FE2  D004               	goto	l647
+   173  007FE4                     l645:
+   174                           
+   175                           ;main.c: 90: else
+   176                           ;main.c: 91: {
+   177                           ;main.c: 92: Switch_Count = 0;
+   178  007FE4  6E02               	movwf	??_main& (0+255),c
+   179  007FE6  0E00               	movlw	0
+   180  007FE8  6E03               	movwf	main@Switch_Count,c
+   181  007FEA  5002               	movf	??_main& (0+255),w,c
+   182  007FEC                     l647:
+   183                           
+   184                           ;main.c: 93: }
+   185                           ;main.c: 94: Delay10TCYx(25);
+   186  007FEC  6E02               	movwf	??_main& (0+255),c
+   187  007FEE  0E19               	movlw	25
+   188  007FF0  6E01               	movwf	?_Delay10TCYx,c
+   189  007FF2  5002               	movf	??_main& (0+255),w,c
+   190  007FF4  ECC8  F03F         	call	_Delay10TCYx	;wreg free
+   191                           
+   192                           ;main.c: 95: } while (Switch_Count < 5);
+   193  007FF8  0E04               	movlw	4
+   194  007FFA  6403               	cpfsgt	main@Switch_Count,c
+   195  007FFC  D7EF               	goto	l641
+   196  007FFE  D7DE               	goto	l631
+   197  008000                     __end_of_main:
+   198                           	opt stack 0
+   199                           intcon2	equ	0xFF1
+   200                           status	equ	0xFD8
+   201                           
+   202 ;; *************** function _Delay10TCYx *****************
+   203 ;; Defined at:
+   204 ;;		line 9 in file "/opt/microchip/xc8/v1.21/sources/pic18/d10tcyx.c"
+   205 ;; Parameters:    Size  Location     Type
+   206 ;;  unit            1    0[COMRAM] unsigned char 
+   207 ;; Auto vars:     Size  Location     Type
+   208 ;;		None
+   209 ;; Return value:  Size  Location     Type
+   210 ;;		None               void
+   211 ;; Registers used:
+   212 ;;		wreg
+   213 ;; Tracked objects:
+   214 ;;		On entry : 0/0
+   215 ;;		On exit  : 0/0
+   216 ;;		Unchanged: 0/0
+   217 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   218 ;;      Params:         1       0       0       0       0       0       0
+   219 ;;      Locals:         0       0       0       0       0       0       0
+   220 ;;      Temps:          0       0       0       0       0       0       0
+   221 ;;      Totals:         1       0       0       0       0       0       0
+   222 ;;Total ram usage:        1 bytes
+   223 ;; Hardware stack levels used:    1
+   224 ;; This function calls:
+   225 ;;		Nothing
+   226 ;; This function is called by:
+   227 ;;		_main
+   228 ;; This function uses a non-reentrant model
+   229 ;;
+   230                           
+   231                           	psect	text1
+   232  007F90                     __ptext1:
+   233                           	opt stack 0
+   234  007F90                     _Delay10TCYx:
+   235                           	opt stack 30
+   236  007F90                     l243:
+   237  007F90  0E03               	movlw	3
+   238  007F92                     u57:
+   239  007F92  2EE8               	decfsz	wreg,f,c
+   240  007F94  D7FE               	goto	u57
+   241  007F96  F000               	nop	
+   242  007F98  2E01               	decfsz	Delay10TCYx@unit,f,c
+   243  007F9A  D7FA               	goto	l243
+   244  007F9C  0012               	return	
+   245  007F9E                     __end_of_Delay10TCYx:
+   246                           	opt stack 0
+   247  0000                     intcon2	equ	0xFF1
+   248                           wreg	equ	0xFE8
+   249                           status	equ	0xFD8
+   250                           intcon2	equ	0xFF1
+   251                           wreg	equ	0xFE8
+   252                           status	equ	0xFD8
+   253                           
+   254                           	psect	rparam
+   255  0000                     intcon2	equ	0xFF1
+   256                           wreg	equ	0xFE8
+   257                           status	equ	0xFD8
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  1
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95      3       4
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMRAM
+
+    _main->_Delay10TCYx
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 2     2      0      30
+                                              1 COMRAM     2     2      0
+                        _Delay10TCYx
+ ---------------------------------------------------------------------------------
+ (1) _Delay10TCYx                                          1     0      1      15
+                                              0 COMRAM     1     0      1
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 1
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _Delay10TCYx
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMRAM           5F      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+COMRAM              5F      3       4       1        4.2%
+STACK                0      0       1       2        0.0%
+DATA                 0      0       5       3        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BANK5              100      0       0      14        0.0%
+ABS                  0      0       4      15        0.0%
+BITBANK5           100      0       0      16        0.0%
+BIGRAM             5FF      0       0      17        0.0%
+BITSFR               0      0       0      40        0.0%
+SFR                  0      0       0      40        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V1.21 build 54009 
+Symbol Table                                                                                   Sun Sep  7 06:30:04 2014
+
+                     l23 7FD0                       u57 7F92             __CFG_CP0$OFF 000000  
+           __CFG_CP1$OFF 000000             __CFG_CP2$OFF 000000             __CFG_CP3$OFF 000000  
+                    l243 7F90                      l631 7FBC                      l641 7FDC  
+                    l645 7FE4                      l647 7FEC             __CFG_CPB$OFF 000000  
+           __CFG_CPD$OFF 000000             __CFG_BORV$30 000000                      wreg 000FE8  
+           __CFG_LVP$OFF 000000                     _LATD 000F8C                     _main 7F9E  
+                   start 0000            __CFG_IESO$OFF 000000              _Delay10TCYx 7F90  
+                  ?_main 0001                    _TRISD 000F95            __CFG_PWRT$OFF 000000  
+          __CFG_WRT0$OFF 000000            __CFG_WRT1$OFF 000000            __CFG_WRT2$OFF 000000  
+          __CFG_WRT3$OFF 000000           __CFG_EBTR0$OFF 000000           __CFG_FCMEN$OFF 000000  
+         __CFG_EBTR1$OFF 000000           __CFG_EBTR2$OFF 000000           __CFG_EBTR3$OFF 000000  
+          __CFG_WRTB$OFF 000000            __CFG_WRTC$OFF 000000            __CFG_WRTD$OFF 000000  
+         __CFG_EBTRB$OFF 000000                    status 000FD8           __CFG_PBADEN$ON 000000  
+         __CFG_MCLRE$OFF 000000          __initialization 7F8A             __end_of_main 8000  
+                 ??_main 0002            __activetblptr 000000                   _ANSELH 000F7F  
+         __CFG_WDTEN$OFF 000000           __CFG_XINST$OFF 000000           __CFG_STVREN$ON 000000  
+             __accesstop 0060  __end_of__initialization 7F8A           __pcstackCOMRAM 0001  
+             __pnvCOMRAM 0004             ?_Delay10TCYx 0001                  __Hparam 0000  
+                __Lparam 0000                  __pcinit 7F8A          Delay10TCYx@unit 0001  
+                __ramtop 0600                  __ptext0 7F9E                  __ptext1 7F90  
+   end_of_initialization 7F8A                _PORTBbits 000F81                _TRISBbits 000F93  
+   __size_of_Delay10TCYx 000E      start_initialization 7F8A         __CFG_LPT1OSC$OFF 000000  
+      __CFG_CCP2MX$PORTC 000000         __CFG_WDTPS$32768 000000                 _WPUBbits 000F7C  
+            _LED_Display 0004              _INTCON2bits 000FF1                 __Hrparam 0000  
+               __Lrparam 0000       __CFG_BOREN$SBORDIS 000000            __size_of_main 0062  
+          ??_Delay10TCYx 0002         main@Switch_Count 0003      __end_of_Delay10TCYx 7F9E  
+      __CFG_FOSC$INTIO67 000000  
